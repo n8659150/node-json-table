@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/DataGarage/node-json-table/issues"
   },
-  "homepage": "https://github.com/DataGarage/node-json-table"
+  "homepage": "https://github.com/DataGarage/node-json-table",
+  "dependencies": {
+    "cli-table": "~0.2.0"
+  }
 }
