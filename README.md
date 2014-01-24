@@ -63,6 +63,8 @@ Here is a sample json
 
 will convert into table like
 
+![preview](https://raw2.github.com/DataGarage/node-json-table/master/sample/img/preview.png)
+
 
 ## License
 
