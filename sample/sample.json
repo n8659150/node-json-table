@@ -79,14 +79,6 @@
     "Fmt": "# ??/??",
     "Macro": "12345 55/81"
 }, {
-    "": "* What is this supposed to be?",
-    "Format": "14",
-    "Valuie": "10/18/33",
-    "B Fmt": "m/d/yy",
-    "VBA Fmt": "10/18/33",
-    "Fmt": "m/d/yy",
-    "Macro": "10/18/33"
-}, {
     
     "Format": "15",
     "Valuie": "18-Oct-33",

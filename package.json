@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/DataGarage/node-json-table",
   "dependencies": {
-    "cli-table": "~0.2.0"
+    "cli-table": "~0.2.0",
+    "async": "~0.2.10"
   }
 }
