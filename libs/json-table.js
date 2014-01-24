@@ -1,5 +1,5 @@
 
-function json_tb(id, json_path) {
+function json_tb(json_path) {
 	this.head_str = '';
 	this.body_str = '';
 	var that = this;
@@ -18,24 +18,6 @@ function json_tb(id, json_path) {
 json_tb.prototype._fetch = function(path, cb) {
 	this.data = '';
 	var that = this;
-
-	$.ajax({
-		url: path,
-		type: 'GET',
-		statusCode: {
-			200: function(msg) {
-				that.data = msg;
-				that._mkhead(msg, function(err, head) {
-					console.log(head);
-					that._mkbody(msg, function(err, body) {
-						var whole = head + body;
-						that.whole = whole;
-						cb(null, whole);
-					})
-				})
-			}
-		}
-	})
 
 }
 
