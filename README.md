@@ -22,7 +22,6 @@ var json_tb = require('json-table');
 
 ```
 var json_tb_out = new json_tb('sample.json')
-console.log(json_tb_out)
 ```
 
 ## Example
