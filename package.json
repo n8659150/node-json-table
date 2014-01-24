@@ -1,0 +1,19 @@
+{
+  "name": "json-table",
+  "version": "0.0.0",
+  "description": "Json table is an easy way to preview your json data in table",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DataGarage/node-json-table.git"
+  },
+  "author": "chilijung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DataGarage/node-json-table/issues"
+  },
+  "homepage": "https://github.com/DataGarage/node-json-table"
+}
