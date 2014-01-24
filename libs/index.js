@@ -80,8 +80,6 @@ JsonTb.prototype.whole = function(callback) {
 		if(err) {
 			console.error(err);
 		}else {
-			delete(that.body);
-			delete(that.head);
 			callback(null, table)
 		}
 	})
