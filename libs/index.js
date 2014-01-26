@@ -4,22 +4,31 @@ var Table = require('cli-table');
 
 module.exports = JsonTb;
 
-function JsonTb(json_path) {
+function JsonTb(item) {
 	var that = this;
 
-	if(!json_path){
-		console.error('You have to pass a path to your json file or API!');
+	if(!item){
+		console.error('You have to pass a path to your json file or API or a json object!');
 		process.exit(1);
 	}
 
-	var load_json = this.load(json_path);
-	var parse = JSON.parse(load_json);
-	this.mkhead(parse);
-	this.mkbody(parse, function(err, result) {
-		that.whole(function(err_whole, table) {
-			that.show(table);
-		})
-	});
+	if(item instanceof Object) {
+		this.mkhead(item);
+		this.mkbody(item, function(err, result) {
+			that.whole(function(err_whole, table) {
+				that.show(table);
+			})
+		});
+	}else {
+		var load_json = this.load(item);
+		var parse = JSON.parse(load_json);
+		this.mkhead(parse);
+		this.mkbody(parse, function(err, result) {
+			that.whole(function(err_whole, table) {
+				that.show(table);
+			})
+		});
+	}
 
 }
 

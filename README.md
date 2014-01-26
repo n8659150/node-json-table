@@ -24,6 +24,9 @@ var json_tb = require('json-table');
 var json_tb_out = new json_tb('sample.json')
 ```
 
+- Arguments:
+	* the first argument can be a json file or a json object
+
 ## Example
 
 Here is a sample json 
