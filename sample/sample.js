@@ -24,5 +24,11 @@ var test_json = [{
     "Fmt": "0.00",
     "Macro": "12345.68"
 }]
-var json_tb_out = new json_tb(test_json)
+var json_tb_out = new json_tb(test_json, 
+    {
+            chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
+             , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
+             , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
+             , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+    })
 //var json_tb_path = new json_tb(__dirname + '/sample.json');

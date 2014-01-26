@@ -4,8 +4,9 @@ var Table = require('cli-table');
 
 module.exports = JsonTb;
 
-function JsonTb(item) {
+function JsonTb(item, config) {
 	var that = this;
+	config = config || {};
 
 	if(!item){
 		console.error('You have to pass a path to your json file or API or a json object!');
@@ -15,7 +16,7 @@ function JsonTb(item) {
 	if(item instanceof Object) {
 		this.mkhead(item);
 		this.mkbody(item, function(err, result) {
-			that.whole(function(err_whole, table) {
+			that.whole(config, function(err_whole, table) {
 				that.show(table);
 			})
 		});
@@ -24,7 +25,7 @@ function JsonTb(item) {
 		var parse = JSON.parse(load_json);
 		this.mkhead(parse);
 		this.mkbody(parse, function(err, result) {
-			that.whole(function(err_whole, table) {
+			that.whole(config, function(err_whole, table) {
 				that.show(table);
 			})
 		});
@@ -75,12 +76,13 @@ JsonTb.prototype.mkbody = function(obj, callback) {
 
 
 // make a whole table
-JsonTb.prototype.whole = function(callback) {
+JsonTb.prototype.whole = function(config, callback) {
 	var that = this;
+	var table_obj = config
+	table_obj.head = that.head;
 	
-	var table = new Table({
-		head: that.head
-	});
+	var table = new Table(table_obj);
+	
 
 	async.each(that.body, function(item, cb) {
 		table.push(item);
