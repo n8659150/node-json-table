@@ -20,7 +20,7 @@ var json_tb = require('json-table');
 ## Usage
 
 
-```
+```javascript
 var json_tb_out = new json_tb('sample.json', {
   chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
     , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
@@ -29,20 +29,20 @@ var json_tb_out = new json_tb('sample.json', {
 })
 ```
 or
-```
+```javascript
 var json_tb_out = new json_tb(<JSON object>);
 ```
 
 - Arguments:
-	* json file, or json object (json): the first argument can be a json file or a json object
-	* configure of the table (object): see detail in https://github.com/LearnBoost/cli-table 
+	* **json file, or json object (json)** : the first argument can be a json file or a json object
+	* **configure of the table (object)** : see detail in https://github.com/LearnBoost/cli-table 
 
 
 ## Example
 
 Here is a sample json 
 
-```
+```json
 [{
     
     "Format": "0",
