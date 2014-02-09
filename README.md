@@ -1,5 +1,7 @@
 # json table
 
+[![Build Status](https://travis-ci.org/DataGarage/node-json-table.png?branch=master)](https://travis-ci.org/DataGarage/node-json-table)
+
 Json table is an easy way to preview your json data in table
 
 ## Install
