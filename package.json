@@ -1,11 +1,15 @@
 {
   "name": "json-table",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Json table is an easy way to preview your json data in table",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha"
   },
+  "keywords": [
+    "table",
+    "json"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/DataGarage/node-json-table.git"
