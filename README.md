@@ -26,16 +26,20 @@ var json_tb_out = new json_tb('sample.json', {
     , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
     , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
     , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+}, function(table) {
+	table.show() // **have to call show() function to print out the table**
 })
 ```
 or
 ```javascript
-var json_tb_out = new json_tb(<JSON object>);
+var json_tb_out = new json_tb(<JSON object>, config, callback);
 ```
 
 - Arguments:
 	* **json file, or json object (json)** : the first argument can be a json file or a json object
-	* **configure of the table (object)** : see detail in https://github.com/LearnBoost/cli-table 
+	* **configure of the table (object)** : `optional` see detail in https://github.com/LearnBoost/cli-table 
+	* **callback (function)** : callback function
+
 
 
 ## Example
