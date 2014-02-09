@@ -4,7 +4,12 @@ var Table = require('cli-table');
 
 module.exports = JsonTb;
 
-function JsonTb(item, config) {
+function JsonTb(item, config, cb) {
+	if(arguments.length == 2) {
+		cb = config;
+		config = null;
+	}
+
 	var that = this;
 	config = config || {};
 
@@ -16,8 +21,11 @@ function JsonTb(item, config) {
 	if(item instanceof Object) {
 		this.mkhead(item);
 		this.mkbody(item, function(err, result) {
+			if(err) throw new Error(err);
 			that.whole(config, function(err_whole, table) {
-				that.show(table);
+				if(err) throw new Error(err_whole);
+				that.table = table;
+				cb(that)
 			})
 		});
 	}else {
@@ -25,8 +33,11 @@ function JsonTb(item, config) {
 		var parse = JSON.parse(load_json);
 		this.mkhead(parse);
 		this.mkbody(parse, function(err, result) {
+			if(err) throw new Error(err);
 			that.whole(config, function(err_whole, table) {
-				that.show(table);
+				if(err) throw new Error(err_whole);
+				that.table = table
+				cb(that)
 			})
 		});
 	}
@@ -98,6 +109,7 @@ JsonTb.prototype.whole = function(config, callback) {
 
 }
 
-JsonTb.prototype.show = function(table) {
+JsonTb.prototype.show = function() {
+	var table = this.table;
 	console.log(table.toString());
 }
