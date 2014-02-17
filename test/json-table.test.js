@@ -25,6 +25,18 @@ var test_json = [{
     "Fmt": "0.00",
     "Macro": "12345.68"
 }]
+
+var test_obj = {
+
+    "Format": "2",
+    "Valuie": "12345.68",
+    "B Fmt": "0.00",
+    "VBA Fmt": "12345.68",
+    "Fmt": "0.00",
+    "Macro": "12345.68"
+};
+
+
 var json_tb_out = new json_tb(test_json, 
     {
             chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
@@ -61,8 +73,31 @@ describe('check if the table is generated (input json object)', function() {
 
 })
 
+describe('check if passing an array will work', function() {
+    it('should return a object (with settings)', function() {
+        var json_tb_obj = new json_tb(test_obj, 
+        {
+                chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
+                 , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
+                 , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
+                 , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+        }, function(json_tb) {
+             json_tb.should.be.instanceOf(Object)
+             json_tb.table.should.be.instanceOf(Object)
+        })
+    })
+
+    it('should be a object (without settings)', function() {
+        var json_tb_out = new json_tb(test_obj, function(json_tb) {
+             json_tb.should.be.instanceOf(Object)
+             json_tb.table.should.be.instanceOf(Object)
+        })
+           
+    })
+})
+
 describe('check if the table is generated (input file)', function() {
-    it('shoulbe be a object (with settings)', function() {
+    it('should be a object (with settings)', function() {
         var json_tb_out = new json_tb('./sample/sample.json', 
         {
                 chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
