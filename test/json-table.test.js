@@ -37,16 +37,6 @@ var test_obj = {
 };
 
 
-var json_tb_out = new json_tb(test_json, 
-    {
-            chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
-             , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
-             , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
-             , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
-    }, function(json_tb) {
-
-    })
-
 describe('check if the table is generated (input json object)', function() {
 
     it('should be a object (with settings)', function() {
@@ -84,7 +74,7 @@ describe('check if passing an array will work', function() {
         }, function(json_tb) {
              json_tb.should.be.instanceOf(Object)
              json_tb.table.should.be.instanceOf(Object)
-        })
+       })
     })
 
     it('should be a object (without settings)', function() {

@@ -11,6 +11,7 @@ function JsonTb(item, config, cb) {
 	}
 
 	var that = this;
+	this.items = item;
 	config = config || {};
 
 	if(!item){
@@ -19,22 +20,31 @@ function JsonTb(item, config, cb) {
 	}
 
 	if(item instanceof Object) {
+		if(item instanceof Array) {
+			// making the head
+			this.mkhead(item);
 
-		// making the head
-		this.mkhead(item);
-
-		// making the body
-		this.mkbody(item, function(err, result) {
-			if(err) throw new Error(err);
-			that.whole(config, function(err_whole, table) {
-				if(err) throw new Error(err_whole);
+			// making the body
+			this.mkbody(item, function(err, result) {
+				if(err) throw new Error(err);
+				that.whole(config, function(err, table) {
+					if(err) throw new Error(err);
+					that.table = table;
+					cb(that)
+				})
+			});
+		} else {
+			this.whole(config, function(err, table) {
+				if(err)
+					throw new Error(err);
 				that.table = table;
-				cb(that)
+				cb(that);
 			})
-		});
+		}
 	}else {
 		var load_json = this.load(item);
 		var parse = JSON.parse(load_json);
+		this.items = parse;
 		this.mkhead(parse);
 		this.mkbody(parse, function(err, result) {
 			if(err) throw new Error(err);
@@ -67,41 +77,26 @@ JsonTb.prototype.mkbody = function(obj, callback) {
 	this.body = [];
 	var that = this;
 
-	if (obj instanceof Array) {
-
-		// an array
-		async.each(obj, function(val, cb) {
-			
-			var each_arr = [];
-
-			Object.keys(val).forEach(function(key) {
-				each_arr.push(val[key]);
-			})
-
-			that.body.push(each_arr);
-
-			cb();
-
-		}, function(err) {
-			if(err) {
-				console.error(err);
-			}else {
-				callback(null, that.body);
-			}
-		})
-	} else {
-
-		// an object
+	// an array
+	async.each(obj, function(val, cb) {
+		
 		var each_arr = [];
 
-		Object.keys(obj).forEach(function(key) {
-			each_arr.push(obj[key]);
+		Object.keys(val).forEach(function(key) {
+			each_arr.push(val[key]);
 		})
 
 		that.body.push(each_arr);
 
-		callback(null, that.body);
-	}
+		cb();
+
+	}, function(err) {
+		if(err) {
+			console.error(err);
+		}else {
+			callback(null, that.body);
+		}
+	})
 }
 
 
@@ -109,23 +104,40 @@ JsonTb.prototype.mkbody = function(obj, callback) {
 JsonTb.prototype.whole = function(config, callback) {
 	var that = this;
 	var table_obj = config
-	table_obj.head = that.head;
-	
-	var table = new Table(table_obj);
-	
 
-	async.each(that.body, function(item, cb) {
-		table.push(item);
-		cb();
-	}, function(err) {
-		if(err) {
-			console.error(err);
-		}else {
-			callback(null, table)
-		}
-	})
+	if (this.items instanceof Array) {
+		table_obj.head = that.head;
+		
+		var table = new Table(table_obj);
+		
 
+		async.each(that.body, function(item, cb) {
+			table.push(item);
+			cb();
+		}, function(err) {
+			if(err) {
+				console.error(err);
+			}else {
+				callback(null, table)
+			}
+		})
 
+	} else {
+		var table = new Table(table_obj);
+		var arr = [];
+		var that = this;
+
+		Object.keys(this.items).forEach(function(key) {
+			var item_obj = {};
+			item_obj[key] = that.items[key]
+			arr.push(item_obj);
+		})
+
+		for (var i = 0; i < arr.length; i++) {
+			table.push(arr[i]);
+		};
+		callback(null, table);
+	}
 }
 
 JsonTb.prototype.show = function() {
